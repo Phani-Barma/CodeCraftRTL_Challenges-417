@@ -1,0 +1,27 @@
+module tb_LightChaser;
+    reg clk, rst, enable;
+    wire [7:0] leds;
+
+    LightChaser uut (.clk(clk), .rst(rst), .enable(enable), .leds(leds));
+
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_LightChaser);
+    end
+
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        rst = 1; enable = 0;
+        #10 rst = 0;
+
+        enable = 1;
+        repeat(20) #10;
+
+        enable = 0;
+        #20 $finish;
+    end
+endmodule
