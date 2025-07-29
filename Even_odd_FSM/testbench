@@ -1,0 +1,33 @@
+module tb_EvenOddFSM;
+    reg clk, rst, valid;
+    reg [3:0] in_data;
+    wire even;
+
+    EvenOddFSM uut (.clk(clk), .rst(rst), .in_data(in_data), .valid(valid), .even(even));
+
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_EvenOddFSM);
+    end
+
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        rst = 1; valid = 0; in_data = 0;
+        #10 rst = 0;
+
+        #10 in_data = 4'd4; valid = 1; // Even
+        #10 valid = 0;
+
+        #10 in_data = 4'd3; valid = 1; // Odd
+        #10 valid = 0;
+
+        #10 in_data = 4'd2; valid = 1; // Even
+        #10 valid = 0;
+
+        #10 $finish;
+    end
+endmodule
