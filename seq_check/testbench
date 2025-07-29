@@ -1,0 +1,27 @@
+module tb_SeqCheck;
+    reg clk, rst, signal_in;
+    wire detected;
+
+    SeqCheck uut (.clk(clk), .rst(rst), .signal_in(signal_in), .detected(detected));
+
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_SeqCheck);
+    end
+
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        rst = 1; signal_in = 0;
+        #10 rst = 0;
+
+        #10 signal_in = 1; #10 signal_in = 0;
+        #10 signal_in = 1; #10 signal_in = 1;
+        #10 signal_in = 0; #10 signal_in = 1;
+
+        #30 $finish;
+    end
+endmodule
