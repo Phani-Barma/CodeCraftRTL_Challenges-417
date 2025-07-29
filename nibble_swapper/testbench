@@ -1,0 +1,33 @@
+module tb_NibbleSwapper;
+    reg clk, rst, swap;
+    reg [7:0] data_in;
+    wire [7:0] data_out;
+
+    NibbleSwapper uut (.clk(clk), .rst(rst), .data_in(data_in), .swap(swap), .data_out(data_out));
+
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_NibbleSwapper);
+    end
+
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        rst = 1; swap = 0; data_in = 8'b00000000;
+        #10 rst = 0;
+
+        #10 data_in = 8'b10110001; swap = 1;
+        #10 swap = 0;
+
+        #10 data_in = 8'b11110000; swap = 1;
+        #10 swap = 0;
+
+        #10 data_in = 8'b01010101; swap = 1;
+        #10 swap = 0;
+
+        #10 $finish;
+    end
+endmodule
