@@ -1,0 +1,33 @@
+module tb_DebouncerLite;
+    reg clk, rst, noisy_in;
+    wire clean_out;
+
+    DebouncerLite uut (.clk(clk), .rst(rst), .noisy_in(noisy_in), .clean_out(clean_out));
+
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_DebouncerLite);
+    end
+
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        rst = 1; noisy_in = 0;
+        #10 rst = 0;
+
+        #10 noisy_in = 1;
+        #10 noisy_in = 0;
+        #10 noisy_in = 1;
+        #10 noisy_in = 1;
+        #10 noisy_in = 1; // Stable high
+
+        #30 noisy_in = 0; // Change again
+        #10 noisy_in = 0;
+        #10 noisy_in = 0;
+
+        #20 $finish;
+    end
+endmodule
