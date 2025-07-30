@@ -220,3 +220,26 @@ Rotate an 8-bit input left or right on each clock cycle based on direction.
 - Right rotate reverses the pattern
 
 
+# 10. EdgeHighlighter
+
+## Objective
+
+Detect rising and falling edges on a signal and output single-cycle pulses for each.
+
+## Interface
+
+| Signal        | Direction | Description                 |
+|---------------|-----------|-----------------------------|
+| clk           | Input     | Clock                       |
+| rst           | Input     | Reset                       |
+| signal_in     | Input     | Input signal                |
+| rising_edge   | Output    | High for 1 cycle on rising  |
+| falling_edge  | Output    | High for 1 cycle on falling |
+
+## Simulation
+
+```bash
+iverilog -o edge_highlighter_tb edge_highlighter.v edge_highlighter_tb.v
+vvp edge_highlighter_tb
+gtkwave edge_highlighter.vcd
+
