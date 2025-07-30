@@ -236,10 +236,10 @@ Detect rising and falling edges on a signal and output single-cycle pulses for e
 | rising_edge   | Output    | High for 1 cycle on rising  |
 | falling_edge  | Output    | High for 1 cycle on falling |
 
-## Simulation
-
-```bash
-iverilog -o edge_highlighter_tb edge_highlighter.v edge_highlighter_tb.v
-vvp edge_highlighter_tb
-gtkwave edge_highlighter.vcd
-
+## Test Scenario : Rising Edge Detection
+- *Description*: Input signal transitions from 0 to 1.
+- *Inputs*:
+  - signal_in: 0 → 1
+- *Expected Output*:
+  - rising_edge: 1 for exactly one clock cycle
+  - falling_edge: 0
