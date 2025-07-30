@@ -48,7 +48,7 @@ Count the number of 1s in an 8-bit input vector.
 - Input: `00000000` → count = 0
 
 
-  # 3. NibbleSwapper
+# 3. NibbleSwapper
 
 ## Objective
 Swap the upper and lower 4 bits (nibbles) of an 8-bit input when enabled.
