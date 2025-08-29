@@ -1,0 +1,15 @@
+--------------------------
+              |        Processor        |
+              |                        |
+   Control --->| Control Bus            |
+   Data   <--> | Data Bus               | <--> Memory
+   Address --->| Address Bus            |
+              --------------------------
+                     |          |
+          -----------           -----------
+          | Input Port |        | Output Port |
+          -----------           -----------
+               |                      |
+        [Input Device]          [Output Device]
+     (Keyboard, Sensor)      (Display, Printer, LED)
+     
